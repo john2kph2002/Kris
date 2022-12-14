@@ -1,0 +1,461 @@
+﻿@model List<UserWish>
+@using KrisKringle.Controllers
+@{
+    ViewData["Title"] = "Kris Kringle";
+}
+<style rel="stylesheet">
+    #jrcfa {
+        margin-left: 50px;
+        margin-top: 20px;
+        font-size: x-large;
+        color: lightgray;
+        cursor: pointer;
+        float: left;
+    }
+
+        #jrcfa:hover {
+            color: white;
+        }
+</style>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href=@Url.Content("~/lib/@fortawesome/fontawesome-free/css/all.min.css") rel="stylesheet" type="text/css" />
+<link href=@Url.Content("~/lib/@fortawesome/fontawesome-free/css/v4-shims.min.css") rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery-ui-1.13.0/jquery-ui-1.13.0/jquery-ui.js"></script>
+<script type="text/javascript" src="~/lib/jquery-ui-1.13.0/jquery-ui-1.13.0/jquery-ui.min.js"></script>
+<div class="card-header">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-6">
+                <input id="Title" value="HAPPY HOLIDAYS " type="text" style="background-color: transparent; text-align: center; border: none; pointer-events: none; font-size: 35px; text-align: center; color: white; font-family: Century Gothic" ,Verdana,sans-serif" />
+            </div>
+            <div class="col-2">
+                <a id="btnLogoutMain" type="submit" class="btn-outline btn-sm" style="font-size: xx-large;margin-left:50px;float:left;" asp-action="Index" asp-controller="Home"><i id="jrcfa" class="fa fa-sign-out fa-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" id="kris" style="margin-top: 0rem !important;">
+    <form asp-action="Index">
+        <div class="col-12">
+            <div class="card-group">
+                <div class="card card-default" style="background: url('@Url.Content("~/image/redXmas.jpg")') no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (UserWish item in Model)
+                            {
+                                <div class="col-4" style="margin-top: 2rem !important;">
+                                    <div class="card-group">
+                                        <div class="card card-default">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="card-group">
+                                                                <input id="userid" value="@item.UsersId" hidden />
+                                                                <div class="col-1" style="margin-top: 5px; font-size: 18px; background-color: #ffebe6; -ms-transform: rotate(-7deg); /* IE 9 */ -webkit-transform: rotate(-7deg); /* Safari */ transform: rotate(-7deg);">
+                                                                    <i class="fa fa-map-pin fa-lg" style="-ms-transform: rotate(17deg); /* IE 9 */ -webkit-transform: rotate(17deg); /* Safari */ transform: rotate(17deg);"></i>
+                                                                </div>
+                                                                <div class="col-10" style="text-align: center; ">
+                                                                    <label id="nick" value="@item.Nick" type="text" style="background-color: transparent; border: none; pointer-events: none; font-size: 1.3em; padding: .5em; text-align: center; color: green; font-family: Century Gothic ,Verdana,sans-serif">@item.Nick</label>
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    @if (item.UsrBtn == 1)
+                                                                    {
+                                                                        <div class="input-group-append" style="text-align:center;">
+                                                                            <a id="btnSettings" class="btn btn-default" style="margin-left:-5px;"><i class="fa fa-ellipsis-v fa-sm" style="margin-top: 10px; font-size: 12px;color:gray;cursor:pointer;"></i></a>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-1">
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <div class="input-group">
+                                                                <table class="table table-borderless" style="border:none;" id="tblView" name="tblView">
+                                                                    <thead class="main-header">
+                                                                        <tr style="border:none; font-size: 10px;">
+                                                                            <th style="text-align:left;">
+                                                                                DATE
+                                                                            </th>
+                                                                            <th style="text-align: left;">
+                                                                                WISH
+                                                                            </th>
+                                                                            <th style="text-align:center;">
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach (var wishs in item.wishes)
+                                                                        {
+                                                                            <tr style="border:none; font-size: 10px;">
+                                                                                @if (item.WishTime != null)
+                                                                                {
+                                                                                    <td class="text-wrap" id="tdWishtim" style="font-size: 13px; font-weight: 500">@wishs.WishTime</td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="text-wrap" id="tdWish" style="font-size: 13px; font-weight: 500;color:red;">"TIME TO</td>
+                                                                                }
+                                                                                @if (item.Wish1 != null)
+                                                                                {
+                                                                                    <td class="text-wrap" id="tdWish" style="font-size: 13px; font-weight: 500">@wishs.Wish1</td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="text-wrap" id="tdWish" style="font-size: 13px; font-weight: 500;color:red;">MAKE A WISH"</td>
+                                                                                }
+                                                                            </tr>
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:10px;">
+                                                        <div class="col-4">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            @if (item.UsrBtn == 1)
+                                                            {
+                                                                <div class="input-group-append" style="text-align:center;">
+                                                                    <a id="addWish" name="wishName" class="btn btn-outline-danger btn-sm" style="pointer-events:all;cursor:pointer;">UPDATE WISH</a>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="card-group">
+                                                                <div class="card border" style="background-color: #f0f2f5;">
+                                                                    <div class="card-body p-4">
+                                                                        <div class="form-outline mb-4" style="margin-top:-30px;">
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <div class="card-group">
+                                                                                        <div class="col-6" style="margin: 20px 10px;">
+                                                                                            <div class="panel" id="@item.Id" onclick="Comment(@item.Id)">
+                                                                                                <a id="addComment" name="addCommentNames" class="btn btn-primary btn-sm" style="pointer-events:all; cursor: pointer;color:white;">ADD COMMENT</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-4">
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row" style="margin-bottom:10px;">
+                                                                            @foreach (var comments in item.comments)
+                                                                            {
+                                                                                <div class="col-12">
+                                                                                    <div class="card-group">
+                                                                                        <div class="card-default">
+                                                                                            <p style="margin-left: -20px; margin-top: -50px;">
+                                                                                                <table class="table table-borderless table-responsive-md" style="overflow-y: auto; border: none;" id="tblView" name="tblView">
+                                                                                                    <thead class="main-header">
+                                                                                                        <tr style="border:none; font-size: 10px;">
+                                                                                                            <th style="text-align:left;">
+                                                                                                            </th>
+                                                                                                            <th style="text-align:left;">
+                                                                                                            </th>
+                                                                                                            <th style="text-align: left;">
+                                                                                                            </th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr style="border: none; font-size: 10px;">
+                                                                                                            <td class="text-wrap" id="tdCommTime"></td>
+                                                                                                            <td class="text-wrap" id="tdCommTime">@comments.UserComment :</td>
+                                                                                                            <td class="text-wrap" id="tdComm">@comments.Comment1</td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="partialModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title">
+                    <label id="lblTitle" style="font-size:x-large;font-family:'Times New Roman', Times, serif">UPDATE WISH</label>
+                </h5>
+                <input id="lblWish" hidden />
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer border-0">
+                <input id="btnSubmit" type="button" value="SUBMIT" class="btn btn-info btn-md" style="display:none;" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="display:none;">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+<body style="background: url('@Url.Content("~/image/redXmas.jpg")') no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+
+</body>
+<div id="popModalSettings" class="modal" tabindex="-1" role="dialog" style="text-align: center; margin-top: 180px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #f4eeee">
+            <div class="modal-header border-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-4">
+                                <a id="btnLogout" type="submit" class="btn-outline btn-sm" style="font-size: medium;margin-left:-20px;float:left;" asp-action="Index" asp-controller="Home">LOGOUT</a>
+                            </div>
+                            <div class="col-10">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col-1">
+
+                                </div>
+                                <div class="col-10">
+                                    <a id="btnChangePass" class="btn btn-secondary btn-lg" style="font-size: larger;cursor:pointer;">CHANGE USERNAME/PASSWORD</a>
+                                </div>
+                                <div class="col-1">
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popChangePass" class="modal" tabindex="-1" role="dialog" style="text-align: center; margin-top: 180px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #f4eeee">
+            <div class="modal-header border-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="modal-title">
+                                <label id="lblLoginTitle" style="font-family: 'Times New Roman', Times, serif">CHANGE USERNAME/PASSWORD</label>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input id="txtUserId" type="text" class="form-control" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">NEW</span>
+                                </div>
+                                <input id="txtUsernameChange" type="text" placeholder="Username" class="form-control" maxlength="6" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">NEW</span>
+                                </div>
+                                <input id="txtPasswordChange" placeholder="Password" type="password" class="form-control" autocomplete="current-password" maxlength="6" />
+                                <span class="input-group-text" style="background-color:white;"> <i class="fa fa-eye" id="togglePassword" style="margin-left:0px;cursor:pointer;"></i> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer border-0">
+                <div class="col-6">
+                    <button id="btnSubmitChange" type="submit" class="btn btn-outline-success btn-block" style="font-size: larger;">UPDATE</button>
+                </div>
+                <div class="col-6">
+                    <button data-dismiss="modal" type="button" class="btn btn-danger btn-block" style="font-size: larger;">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script language="javascript">
+
+    const togglePassword = document.querySelector('#togglePassword');
+    const Password = document.querySelector('#txtPasswordChange');
+
+    togglePassword.addEventListener('click', function (e) {
+        const type = Password.getAttribute('type') === 'Password' ? 'text' : 'Password';
+        Password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    function Comment(id) {
+        var id = id;
+        var userCommentId = $("#userid").val();
+        //alert(wish);
+        $.ajax({
+            //async: false,
+            type: "POST",
+            url: "/KrisKringle/Comment",
+            data: { id: id, userCommentId: userCommentId },
+            //dataType: "JSON",
+            success: function (response) {
+                $("#partialModal").find(".modal-body").html(response);
+                $("#partialModal").modal('show');
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    }
+    $(document).ready(function () {
+        $("[name = 'wishName']").click(function () {
+            var id = $("#userid").val();
+            //var wish = $("#userid").val();
+            //alert(wish);
+            $.ajax({
+                //async: false,
+                type: "POST",
+                url: "/KrisKringle/Wish",
+                data: { id: id },
+                //dataType: "JSON",
+                success: function (response) {
+                    $("#partialModal").find(".modal-body").html(response);
+                    $("#partialModal").modal('show');
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+    });
+
+    $(function () {
+        $("#btnSettings").click(function () {
+            $("#partialModal").modal('hide');
+            $("#popModalSettings").find(".modal-body").html();
+            $("#popModalSettings").modal('show');
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btnChangePass").click(function () {
+            var userid = $("#userid").val();
+            //alert(wish);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/KrisKringle/ChangePass",
+                data: { userid: userid },
+                dataType: "JSON",
+                success: function (response) {
+                    $("#popModalSettings").modal('hide');
+                    if (response.isValid == true) {
+                        $("#popChangePass").find(".modal-body").html(response);
+                        $("#popChangePass").modal('show');
+                        $("#txtUsernameChange").val(response.deUsernamme);
+                        $("#txtPasswordChange").val(response.dePassword);
+                        $("#txtUserId").val(response.usersid);
+                    }
+                    else {
+                        alert(response.isValid);
+                        e.preventDefault();
+                    }
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btnSubmitChange").click(function (e) {
+            var userid = $("#txtUserId").val();
+            var username = $("#txtUsernameChange").val();
+            var password = $("#txtPasswordChange").val();
+            //alert(wish);
+            if (confirm("UPDATE USER?")) {
+                try {
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "/KrisKringle/UpdatePassUser",
+                        data: { userid: userid, username: username, password: password },
+                        dataType: "JSON",
+                        success: function (response) {
+                            if (response.isValid == false) {
+                                alert(response.isValid);
+                                e.preventDefault();
+                            }
+                            else if (response == 1) {
+                                alert("INVALID USERNAME/PASSWORD");
+                                e.preventDefault();
+                            }
+                            else {
+                                $("#popChangePass").modal('hide');
+                                if (confirm("UPDATED SUCCESSFULY") == true) {
+                                    window.location.replace("/KrisKringle/Index/" + response.enUsername);
+                                }
+                                else {
+                                    window.location.replace("/KrisKringle/Index/" + response.enUsername);
+                                }
+                            }
+                        },
+                        error: function (response) {
+                            console.log(response.responseText);
+                        }
+                    });
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+            e.preventDefault();
+        });
+    });
+
+</script>
+
+

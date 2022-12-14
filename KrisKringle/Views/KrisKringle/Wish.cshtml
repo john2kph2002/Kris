@@ -1,0 +1,113 @@
+﻿@model Wishes
+@using KrisKringle.Models
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="input-group mb-3">
+            <input class="form-control" id="wishUser" hidden type="text" value="@Model.UsersId" />
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+            </div>
+            <input name="Wish1" asp-for="Wish1" id="txtWish1" type="text" placeholder="WISH 1" class="form-control" />
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+            </div>
+            <input name="Wish2" asp-for="Wish2" id="txtWish2" type="text" placeholder="WISH 2" class="form-control" />
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+            </div>
+            <input name="Wish3" asp-for="Wish3" id="txtWish3" type="text" placeholder="WISH 3" class="form-control" />
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-6">
+    </div>
+    <div class="col-6">
+        <input id="btnSubmitWish" type="button" value="SUBMIT" class="btn btn-info btn-md" />
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+    </div>
+</div>
+
+<script language="javascript">
+    $(document).ready(function (e) {
+        $("#btnSubmitWish").click(function () {
+            var userid = $("#wishUser").val();
+            var wish1 = $("#txtWish1").val();
+            var wish2 = $("#txtWish2").val();
+            var wish3 = $("#txtWish3").val();
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/KrisKringle/UpdateWish",
+                data: { wish1: wish1, wish2: wish2, wish3: wish3, userid: userid },
+                dataType: "JSON",
+                success: function (response) {
+                    $("#partialModal").modal('hide');
+                    if (response.isValid == true) {
+                        window.location.reload();
+                        //var redirectUrl = "KrisKringle/Index/" + response.username;
+                        //if (confirm('wish added') == true) {
+                        //    window.location.href = redirectUrl;
+                        //}
+                        //else {
+                        //    window.location.href = redirectUrl;
+                        //}
+                        //var user = response.username;
+                        //ViewIndex(user);
+                    }
+                    else if (response == 1) {
+                        alert("NO WISH TO UPDATE");
+                        e.preventDefault();
+                    }
+                    else {
+                        alert(response.isValid);
+                        e.preventDefault();
+                    }
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+    });
+
+    function ViewIndex(user) {
+        var user = user;
+        var _url = '/KrisKringle/redIrect/';
+        try {
+            $.ajax({
+                //cache: false,
+                type: "GET", //as we will be posting files and other method POST is used
+                url: _url, //URL to upload files
+                data: { user: user },
+                //dataType: "json",
+                async: false,
+                success: function (result) {
+                    //console.log(result)
+                    //if (result == "invalid") {
+
+                    //}
+                    //else {
+                    //    $("#imageA").show();
+                    //    $("#imageB").show();
+                    //    $("#imageC").show();
+                    //}
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                },
+            })
+        }
+        catch (e) {
+            alert(e)
+        }
+    }
+</script>

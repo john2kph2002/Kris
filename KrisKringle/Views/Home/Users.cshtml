@@ -1,0 +1,266 @@
+﻿@model PaginatedList<Usr>
+@using KrisKringle.Models
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_Layout";
+}
+<div class="pull-left module-title">
+    <div style="display:flex;">
+        <h1>CREATE USERS</h1> <label id="lblAccess" style="font-size:xx-large;font-family:'Times New Roman', Times, serif"></label>
+    </div>
+</div>
+
+<div class="panel-body" id="Usrs">
+    <form asp-action="Users" method="post" autocomplete="on" onkeydown="return (event.keyCode!=13)" onunload="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-group">
+                    <div class="card card-default">
+                        <div class="card-body" style="margin-bottom: -20px;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">USER NAME</div>
+                                            </div>
+                                            <input class="form-control" id="userName" name="userName" type="text" value="@ViewData["username"]" maxlength="6" />
+                                            <input class="form-control" id="id" name="id" type="text" value="@ViewData["id"]" hidden />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">PASSWORD</div>
+                                            </div>
+                                            <input class="form-control" id="password" name="password" type="password" value="@ViewData["password"]" maxlength="6" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">NICK NAME</div>
+                                            </div>
+                                            <input class="form-control" id="nickName" name="nickName" type="text" value="@ViewData["nick"]" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">IS ADMIN</div>
+                                            </div>
+                                            @if (@ViewBag.IsAdmin == "null")
+                                            {
+                                                <input id="checkAdmin" class="form-control" type="checkbox" name="checkAdmin" checked="checked" />
+                                            }
+                                            else
+                                            {
+                                                <input id="checkAdmin" class="form-control" type="checkbox" name="checkAdmin" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">DEPARTMENT</div>
+                                            </div>
+                                            <select class="form-control" name="deptsel" id="deptId" asp-items="@(new SelectList(ViewBag.deplist,"Value","Text",@ViewData["DepartmentId"]))">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <button id="btnAdd" type="submit" class="btn btn-primary btn-block">
+                                            SAVE
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="cards-group">
+        <div class="card card-default">
+            <div class="card-body">
+                <center>
+                    <table class="table table-striped" style="overflow-x:auto" id="tblUsr">
+                        <thead class="main-header">
+                            <tr>
+                                <th style="text-align:center;">
+                                    <a class="control-label" asp-action="Users" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"><label class="control-label">USERNAME</label></a>
+
+                                </th>
+                                <th style="text-align:center;">
+                                    <label class="control-label">NICK NAME</label>
+                                </th>
+                                <th style="text-align:center;">
+                                    <label class="control-label">DEPARTMENT</label>
+                                </th>
+                                <th style="text-align:center;">
+                                    <label class="control-label">IS ADMIN</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var items in Model)
+                            {
+                            <tr style="border:1px solid black; font-size: 12px;">
+                                <td class="text-wrap" id="tdUsername" style="text-align:center;">@items.Username</td>
+                                <td class="text-wrap" id="tdDeptId" style="text-align:center;">@items.Nick</td>
+                                <td class="text-wrap" id="tdDeptName" style="text-align:center;">@items.DepartmentName</td>
+                                <td class="text-wrap" id="tdDeptName" style="text-align:center;">@items.IsAdmin</td>
+                                <td class="text-wrap">
+                                    @*<form asp-action="DeleteUsers" asp-route-id="@items.Id" onsubmit="return JQueryAjaxDelete(this);" class="d-inline">
+                <button type="submit" class="btn btn-danger btn-sm" id="btnDelete">DELETE</button>
+            </form>*@
+                                    <a class="btn btn-info btn-sm" asp-route-id="@items.Id" asp-action="Users">EDIT</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div style="padding-top: 10px;">
+                        <a class="float-lg-left tbl-page-info">Showing Page @Model.PageIndex of @Model.TotalPages</a>
+                        @{
+                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                        }
+                        <a asp-action="Users"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @prevDisabled">
+                            Previous
+                        </a>
+                        <a asp-action="Users"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @nextDisabled">
+                            Next
+                        </a>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        $("#btnAdd").click(function (e) {
+            var admin = $("input[name='checkAdmin']").is(':checked').valueOf(true);
+            var nick = $("#nickName").val();
+            var password = $("#password").val();
+            var username = $("#userName").val();
+            var deptId = $("#deptId").val();
+            var id = $("#id").val();
+            console.log(nick + " " + username);
+            if (confirm("Save user?")) {
+                try {
+                    $.ajax({
+                        //cache: false,
+                        type: "POST",
+                        url: "/Home/AddUpdateUser",
+                        data: { username: username, password: password, nick: nick, deptId: deptId, id: id, admin:admin},
+                        dataType: "json",
+                        //async: false,
+                        success: function (data) {
+                            if (data.isValid == true) {
+                                var redirectUrl = data.redirect;
+                                if (confirm("SAVED SUCCESSFULY") == true) {
+                                    window.open('', '_self', '').close();
+                                    window.open(redirectUrl);
+                                }
+                                else {
+                                    window.open('', '_self', '').close();
+                                    window.open(redirectUrl);
+                                }
+                            }
+                            else {
+                                console.log(data.error)
+                                if (confirm("info: " + data.error) == true) {
+                                    return;
+                                }
+                                else {
+                                    return;
+                                }
+                            }
+                        },
+                        error: function (err) {
+                            alert("error", +err);
+                        }
+                    });
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+            e.preventDefault();
+        });
+    });
+</script>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\repos\KrisKringle\KrisKringle\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+  <dbfullsql path="D:\repos\KrisKringle\KrisKringle\obj\Release\netcoreapp3.1\PubTmp\EFSQLScripts\KrisKringle.Models.Kris_dbContext.sql" />
+</sitemanifest>

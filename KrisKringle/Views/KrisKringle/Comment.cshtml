@@ -1,0 +1,53 @@
+﻿@model UserWish
+@using KrisKringle.Models
+<div class="input-group">
+    <div class="input-group-prepend">
+        <input class="form-control" id="UserId" hidden type="text" value="@Model.UsersId" />
+        <input class="form-control" id="commentUser" hidden type="text" value="@Model.UserComment" />
+        <button type="submit" class="btn btn-danger" style="pointer-events:none;">Comment</button>
+    </div>
+    <input class="form-control" id="txtComment" placeholder="comment" type="text" />
+</div>
+<br />
+
+<div class="row">
+    <div class="col-6">
+    </div>
+    <div class="col-6">
+        <input id="btnSubmitComment" name="addCommentName" type="button" value="SUBMIT" class="btn btn-info btn-md" />
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+    </div>
+</div>
+<script language="javascript">
+    $(document).ready(function () {
+        $("[name = 'addCommentName']").click(function () {
+            var note = $("#txtComment").val();
+            var userid = $("#UserId").val();
+            var commentUser = $("#commentUser").val();
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/KrisKringle/AddComment",
+                data: { userid: userid, note: note, commentUser: commentUser},
+                dataType: "JSON",
+                success: function (response) {
+                    if (response.isValid != false) {
+                        window.location.reload();
+                        //var redirectUrl = "KrisKringle/Index/" + response.username;
+                        //if (confirm('wish added') == true) {
+                        //    window.location.href = redirectUrl;
+                        //}
+                        //else {
+                        //    window.location.href = redirectUrl;
+                        //}
+                        //var user = response.username;
+                        //ViewIndex(user);
+                    }
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+    });
+</script>

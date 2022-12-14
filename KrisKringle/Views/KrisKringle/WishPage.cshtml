@@ -1,0 +1,178 @@
+﻿@model Wishes
+@using KrisKringle.Controllers
+@{
+    ViewData["Title"] = "Kris Kringle";
+}
+<script>
+            var rootAppPath = '@(Url.Content("~/"))';
+</script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href=@Url.Content("~/lib/@fortawesome/fontawesome-free/css/all.min.css") rel="stylesheet" type="text/css" />
+<link href=@Url.Content("~/lib/@fortawesome/fontawesome-free/css/v4-shims.min.css") rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.structure.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.structure.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/themes/smoothness/theme.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery-ui-1.13.0/jquery-ui-1.13.0/jquery-ui.js"></script>
+<script type="text/javascript" src="~/lib/jquery-ui-1.13.0/jquery-ui-1.13.0/jquery-ui.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4" style="color:white">Merry Christmas</h1>
+    <form asp-action="Index" autocomplete="on" onkeydown="return (event.keyCode!=13)" onunload="">
+        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+        <div id="popWish" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style="text-align:center;margin-top:120px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="background-color: #e6f0ff">
+                    <div class="modal-header border-0">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                    <h5 class="modal-title">
+                                        <label id="lblLoginTitle" style="font-size: xx-large; font-family: 'Times New Roman', Times, serif"><i class="fa fa-tree"></i>MAKE A WISH</label>
+                                    </h5>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group-append" style="text-align:left;float:left">
+                                        <input id="userid" value="@Model.Username" hidden />
+                                        @*<a id="btnSettings" class="btn btn-default" style="margin-left: 30px; float: left; text-align: left; "><i class="fa fa-ellipsis-v fa-sm" style="margin-top: 0px; font-size: 12px; text-align: left; color: gray; float: left;cursor:pointer;"></i></a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="close" asp-action="Index" asp-controller="Home">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            @*<table class="table table-borderless" style="border:none;" id="tblView" name="tblView">
+                                <thead class="main-header">
+                                    <tr style="border:none; font-size: 10px;">
+                                        <th style="text-align:left;">
+                                          
+                                        </th>
+                                        <th style="text-align: left;">                                          
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border:none; font-size: 10px;">
+                                       
+                                    </tr>
+                                </tbody>
+                            </table>*@
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+                                        </div>
+                                        <input name="Wish1" asp-for="Wish1" id="txtWish1" type="text" placeholder="WISH 1" class="form-control" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+                                        </div>
+                                        <input name="Wish2" asp-for="Wish2" id="txtWish2" type="text" placeholder="WISH 2" class="form-control" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+                                        </div>
+                                        <input name="Wish3" asp-for="Wish3" id="txtWish3" type="text" placeholder="WISH 3" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <div class="col-12" style="background-color: #e6f0ff">
+                            <button id="btnSubmit" type="button" class="btn btn-primary btn-block" style="font-size: larger;">ADD WISHES</button>
+                            <div class="row">
+                                <div class="col-6">
+                                   
+                                </div>
+                                <div class="col-6">
+                                    <p id="demo" style="border: none; pointer-events: none; color: lightslategray; font-size: 12px; text-align: right; background-color: #e6f0ff"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<body id="bodyX" style="background: max-width: 100%; height: auto; position: relative; background-image: url('@Url.Content("~/image/snowy.gif")'); background-repeat: no-repeat; background-position: bottom center; background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
+
+</body>
+<script language="javascript" type="text/javascript">
+    $("#popWish").find(".modal-body").html();
+    $("#popWish").modal('show');
+
+    setInterval(myTimer, 1000);
+
+    function myTimer() {
+        const d = new Date();
+        document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+    }
+
+    $(function () {
+        $("#btnSubmit").click(function (e) {
+            var wish1 = $("#txtWish1").val();
+            var wish2 = $("#txtWish2").val();
+            var wish3 = $("#txtWish3").val();
+            var userid = $("#userid").val();
+            try {
+                $.ajax({
+                    //cache: false,
+                    type: "POST",
+                    url: "/KrisKringle/AddWishes",
+                    data: { wish1: wish1, wish2: wish2, wish3: wish3, userid: userid},
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        if (response.isValid == true) {
+                            if (confirm('WISH GRANTED') == true) {
+                                // window.open('', '_self', '').close();
+                                //window.open(response.url);
+                                window.location.href = response.url;
+                            }
+                            else {
+                                //  window.open('', '_self', '').close();
+                                //window.open(response.url);
+                                window.location.href = response.url;
+                            }
+                        }
+                        else if (response == 1) {
+                            alert('LACK OF WISH');
+                            e.preventDefault();
+                        }
+                        else {
+                            alert('info: link is '+ response.isValid);
+                            e.preventDefault();
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+            catch (e) {
+                alert("err: " + e)
+            }
+        });
+    });
+</script>

@@ -1,0 +1,151 @@
+﻿@*@model List<UserWish>
+@using KrisKringle.Models*@
+@*@{
+        ViewData["Title"] = "Wish Dates";
+    }*@
+<center>
+    <div id="divDates">
+        <input type="text" id="lblUsername" value="@ViewData["UsersId"]" hidden />
+        <table class="table table-borderless" style="border:none;" id="tblView" name="tblView">
+            <thead class="main-header">
+                <tr>
+                    <th style="text-align:left;">
+                        @*<label class="control-label" style="border: none; pointer-events: none;" id="thDate">DATE</label>*@
+                    </th>
+                    <th style="text-align: left;">
+                        @*<label class="control-label">WISH</label>*@
+                    </th>
+                    <th style="text-align:center;">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var items in Model)
+                    {*@
+                <tr style="border:none; font-size: 9px;">
+                    @*<td hidden><input checked="checked" id="checkName" type="checkbox" name="checkName" value="@items.Id" hidden /></td>*@
+                    @*<td>@items.WishDate"</td>*@
+                    @*<td class="text-wrap" id="tdDesc" style="text-align:center;">@items.Wish1</td>*@
+                    <td class="text-wrap" id="tdDesc" style="text-align:center;">DATE<input id="lblDate" style="border: none; pointer-events: none;" class="control-label" type="text" @*asp-for="@items.WishTime" /*@> </td>
+                    <td class="text-wrap" id="tdDesc" style="text-align:center;">WISH<input id="txtWish" class="control-label" type="text" @*asp-for="@items.Wish1"*@ /> </td>
+                    @*<td class="text-wrap" id="tdDesc" style="text-align:center;"><input id="lblWish" class="control-label" name="lblWishname" type="text" style="border:none; pointer-events:none;" /> </td>*@
+                    @*<td class="text-wrap" id="tdDesc" style="text-align:center;"> <input type="submit" id="btnEdit" value="EDIT" class="btn btn-danger" /> </td>*@
+                </tr>
+                @*}*@
+            </tbody>
+        </table>
+
+        @*}*@
+    </div>
+</center>
+<div class="card-body" style="margin-top: -30px; margin-bottom: -15px;">
+    <div class="row">
+        <div class="col-8">
+        </div>
+        <div class="col-2">
+            <button type="submit" id="btnAdd" class="btn btn-danger">add</button>
+        </div>
+    </div>
+</div>
+<!--<div id="partialModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">-->
+@*<label id="lblRejectTitle" style="font-size:xx-large;font-family:'Times New Roman', Times, serif"></label>*@
+<!--</h5>-->
+@*<input id="lblRejectTxt" hidden/>*@
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <input id="btnSubmit" type="button" value="SUBMIT" class="btn btn-info btn-md" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<script language="javascript">
+        //$(document).ready(function () {
+        //    $("#btnSubmit").click(function (e) {
+        //        var dates = [];
+        //        var wishes = [];
+        //        var dateId, wish;
+        //        $("#tblDates tr").each(function (index) {
+        //            var row = $(this);
+
+        //            if (row.find("input[name='checkName']").is(":checked")) {
+        //                dateId = row.find("[name='checkName']").attr("value");
+        //                wish = row.find("[name='txtWishname']").val(); //$("#txtqty").val()
+        //                dates.push(dateId);
+        //                wishes.push(wish);
+        //            }
+        //        })
+        //        var id = $("#userid").val();
+        //        console.log(dates + " " + wishes + " " + id);
+        //        try {
+        //            $.ajax({
+        //                //cache: false,
+        //                type: "POST",
+        //                url: "/KrisKringle/AddWish",
+        //                data: { dates: dates, wishes: wishes, id: id },
+        //                dataType: "json",
+        //                //async: false,
+        //                success: function (data) {
+        //                    if (data != null) {
+        //                        $(".jrc").hide();
+        //                        //$("#tblView").show();
+        //                        //ViewResult(data);
+        //                    }
+        //                    else {
+        //                        console.log(data.modelState)
+        //                    }
+        //                },
+        //                error: function (err) {
+        //                    alert("error", +err);
+        //                }
+        //            });
+        //        }
+        //        catch (e) {
+        //            console.log(e)
+        //        }
+        //    });
+        //});
+
+        //function ViewResult(data) {
+        //    var id = data;
+        //    try {
+        //        $.ajax({
+        //            cache: false,
+        //            type: "GET", //as we will be posting files and other method POST is used
+        //            url: '/KrisKringle/ViewResult', //URL to upload files
+        //            data: { id: id },
+        //            dataType: "json",
+        //            async: false,
+        //            success: function (result) {
+        //                console.log(result)
+        //                if (result == "invalid") {
+
+        //                }
+        //                else {
+        //                    $("#imageA").show();
+        //                    $("#imageB").show();
+        //                    $("#imageC").show();
+        //                }
+        //            },
+        //            error: function (err) {
+        //                alert(err.statusText);
+        //            },
+        //        })
+        //    }
+        //    catch (e) {
+        //        alert(e)
+        //    }
+        //}
+
+
+</script>

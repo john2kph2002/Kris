@@ -1,0 +1,202 @@
+﻿@model PaginatedList<Department>
+@using KrisKringle.Models
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_Layout";
+}
+<div class="pull-left module-title">
+    <div style="display:flex;">
+        <h1>CREATE DEPARTMENT</h1> <label id="lblAccess" style="font-size:xx-large;font-family:'Times New Roman', Times, serif"></label>
+    </div>
+</div>
+
+<div class="panel-body" id="Dept">
+    <form asp-action="Department" method="post" autocomplete="on" onkeydown="return (event.keyCode!=13)" onunload="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-group">
+                    <div class="card card-default">
+                        <div class="card-body" style="margin-bottom: -20px;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">NAME</div>
+                                            </div>
+                                            <input class="form-control" id="dept" name="dept" type="text" value="@ViewData["dept"]" />
+                                            <input class="form-control" id="id" name="id" type="text" value="@ViewData["id"]" hidden />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">ACTIVE</div>
+                                            </div>
+                                            @if(@ViewBag.Active == "null")
+                                            {
+                                                <input id="checkActive" class="form-control" type="checkbox" name="checkActive" checked="checked" />
+                                            }
+                                            else
+                                            {
+                                                <input id="checkActive" class="form-control" type="checkbox" name="checkActive" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <button id="btnAdd" type="submit" class="btn btn-primary btn-block">
+                                            SAVE
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="cards-group">
+        <div class="card card-default">
+            <div class="card-body">
+                <center>
+                    <table class="table table-striped" style="overflow-x:auto" id="tblDept">
+                        <thead class="main-header">
+                            <tr>
+                                <th style="text-align:center;">
+                                    <a class="control-label" asp-action="Department" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"><label class="control-label">NAME</label></a>
+
+                                </th>
+                                <th style="text-align:center;">
+                                    <label class="control-label">IS ACTIVE</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var items in Model)
+                            {
+                                <tr style="border:1px solid black; font-size: 12px;">
+                                    <td hidden><input id="checkName" type="checkbox" name="checkName" value="@items.Id" hidden /></td>
+                                    <td class="text-wrap" id="tdName" style="text-align:center;">@items.Name</td>
+                                    <td class="text-wrap" id="tdDesc" style="text-align:center;">@items.Active</td>
+                                    <td class="text-wrap">
+                                        @*<form asp-action="DeleteDepartment" asp-route-id="@items.Id" onsubmit="return JQueryAjaxDelete(this);" class="d-inline">
+                                            <button type="submit" class="btn btn-danger btn-sm" id="btnEdit">EDIT</button>
+                                        </form>*@
+                                        <a class="btn btn-info btn-sm" asp-route-id="@items.Id" asp-action="Department">EDIT</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div style="padding-top: 10px;">
+                        <a class="float-lg-left tbl-page-info">Showing Page @Model.PageIndex of @Model.TotalPages</a>
+                        @{
+                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                        }
+                        <a asp-action="Department"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @prevDisabled">
+                            Previous
+                        </a>
+                        <a asp-action="Department"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @nextDisabled">
+                            Next
+                        </a>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        $("#btnAdd").click(function (e) {
+            var active = $("input[name='checkActive']").is(':checked').valueOf(true);
+            var department = $("#dept").val();
+            var id = $("#id").val();
+            console.log(active + " " + department);
+            if (confirm("Save department?")) {
+                try {
+                    $.ajax({
+                        //cache: false,
+                        type: "POST",
+                        url: "/Home/AddUpdateDepartment",
+                        data: { department: department, active: active, id:id},
+                        dataType: "json",
+                        //async: false,
+                        success: function (data) {
+                            console.log(data.redirect);
+                            if (data.isValid == true) {
+                                var redirectUrl = data.redirect;
+                                if (confirm("Saved successfully") == true) {
+                                    window.open('', '_self', '').close();
+                                    window.open(redirectUrl);
+                                }
+                                else {
+                                    window.open('', '_self', '').close();
+                                    window.open(redirectUrl);
+                                }
+                            }
+                            else {
+                                console.log(data.error)
+                                if (confirm("info: " + data.error) == true) {
+                                    return;
+                                }
+                                else {
+                                    return;
+                                }
+                            }
+                        },
+                        error: function (err) {
+                            alert("error", +err);
+                        }
+                    });
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+            e.preventDefault();
+        });
+    });
+</script>

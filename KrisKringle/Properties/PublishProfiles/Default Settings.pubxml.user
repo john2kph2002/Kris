@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA816rLPV6R0KtOScyWjWHvQAAAAACAAAAAAADZgAAwAAAABAAAABzLb7gJKODyMHi11aGHj+tAAAAAASAAACgAAAAEAAAAPSb0FkrwRWbF6P6bOAdkS0YAAAAfGQojA43QdWwJzbgTPjgGPwtx+30rk9eFAAAAI+kMMFqpextFaCmdXaAMjIXyXtJ</EncryptedPassword>
+    <History>True|2022-12-14T00:53:11.2767637Z;True|2022-12-13T14:18:06.8569773+08:00;True|2022-12-13T13:46:48.3512122+08:00;True|2022-12-13T13:42:10.4560019+08:00;True|2022-12-13T11:27:51.6000619+08:00;True|2022-12-13T11:02:14.6349591+08:00;True|2022-12-13T10:52:49.9789813+08:00;True|2022-12-13T10:43:15.0357225+08:00;True|2022-12-12T14:39:45.8707212+08:00;True|2022-12-12T14:36:38.5501301+08:00;True|2022-12-12T14:30:41.6427466+08:00;True|2022-12-12T14:29:21.1621203+08:00;True|2022-12-12T10:39:30.3297126+08:00;True|2022-12-12T10:02:00.0996223+08:00;True|2022-12-07T15:58:31.6889662+08:00;True|2022-12-07T15:01:05.5494143+08:00;True|2022-12-07T14:32:49.5904515+08:00;True|2022-12-07T14:31:15.0474808+08:00;True|2022-12-06T16:00:55.3755829+08:00;True|2022-12-06T15:53:44.7579029+08:00;True|2022-12-06T15:27:33.2478554+08:00;True|2022-12-06T15:16:59.6239194+08:00;True|2022-12-06T14:46:04.2850080+08:00;True|2022-12-06T14:27:35.0822221+08:00;True|2022-12-06T13:21:07.7876881+08:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="Kris_dbContext">
+      <Value>Server=10.0.2.152%3bDatabase=Kris_db%3bUser Id=sa%3b Password=p%40ssw0rd%3bMultipleActiveResultSets=true%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="KrisKringle.Models.Kris_dbContext">
+      <Value>Server=10.0.2.152%3bDatabase=Kris_db%3bUser Id=sa%3b Password=p%40ssw0rd%3bMultipleActiveResultSets=true%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

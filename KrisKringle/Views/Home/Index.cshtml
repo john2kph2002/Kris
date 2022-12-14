@@ -1,0 +1,237 @@
+﻿@model Usr
+@using KrisKringle.Controllers
+@{
+    ViewData["Title"] = "Kris Kringle";
+}
+<script>
+            var rootAppPath = '@(Url.Content("~/"))';
+</script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href=@Url.Content("~/lib/@fortawesome/fontawesome-free/css/all.min.css") rel="stylesheet" type="text/css" />
+<link href=@Url.Content("~/lib/@fortawesome/fontawesome-free/css/v4-shims.min.css") rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.structure.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/jquery-ui.structure.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-ui-themes-1.13.0/jquery-ui-themes-1.13.0/themes/smoothness/theme.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery-ui-1.13.0/jquery-ui-1.13.0/jquery-ui.js"></script>
+<script type="text/javascript" src="~/lib/jquery-ui-1.13.0/jquery-ui-1.13.0/jquery-ui.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4" style="color:white">Merry Christmas</h1>
+    <form asp-action="Index" autocomplete="on" onkeydown="return (event.keyCode!=13)" onunload="">
+        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+        <div id="partialModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style="text-align:center;margin-top:120px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="background-color: #e6f0ff">
+                    <div class="modal-header border-0">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                    <h5 class="modal-title">
+                                        <label id="lblLoginTitle" style="font-size: xx-large; font-family: 'Times New Roman', Times, serif"><i class="fa fa-tree"></i> Kris Kringle</label>
+                                    </h5>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group-append" style="text-align:left;float:left">
+                                        <a id="btnSettings" class="btn btn-default" style="margin-left: 30px; float: left; text-align: left; "><i class="fa fa-ellipsis-v fa-sm" style="margin-top: 0px; font-size: 12px; text-align: left; color: gray; float: left;cursor:pointer;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>*@
+                    </div>
+                    <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+                                            </div>
+                                            <input name="Username" asp-for="Username" id="txtUsername" type="text" placeholder="Username" class="form-control" />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-gifts"></i></span>
+                                            </div>
+                                            <input name="Password" asp-for="Password" id="Password" type="password" placeholder="Password" class="form-control" autocomplete="current-password" />
+                                            @*<div class="input-group-append" style="background-color:transparent;border:none;">
+                                                <span class="input-group-text" style="background-color:white;"> <i class="fa fa-eye" id="togglePassword" style="margin-left:0px;cursor:pointer;"></i> </span>
+                                            </div>*@
+                                        </div>
+                                        @*<input asp-for="Username" id="txtUsername" type="text" placeholder="Username" style="margin-bottom:5px;" class="form-control" />
+                                            <input asp-for="Password" id="txtPassword" type="password" placeholder="Password" class="form-control" />*@
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <div class="col-12" style="background-color: #e6f0ff">
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-block" style="font-size: larger;" asp-action="Login">Log In</button>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input value="™ ­ICT - @DateTime.Now.ToString("yyyy")" style="border: none; pointer-events: none; color: lightslategray; font-size: 12px; text-align: left;float:left; background-color: #e6f0ff;" />
+                                </div>
+                                <div class="col-6">
+                                    <p id="demo" style="border: none; pointer-events: none; color: lightslategray; font-size: 12px; text-align: right; background-color: #e6f0ff"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<body id="bodyX" style="background: max-width: 100%; height: auto; position: relative; background-image: url('@Url.Content("~/image/snowy.gif")'); background-repeat: no-repeat; background-position: bottom center; background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
+
+</body>
+<div id="popModalSettings" class="modal" tabindex="-1" role="dialog" style="text-align: center; margin-top: 180px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #f4eeee">
+            <div class="modal-header border-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <h5 class="modal-title">
+                                <label id="lblLoginTitle" style="font-size: x-large; font-family: 'Times New Roman', Times, serif">FORGOT PASSWORD</label>
+                            </h5>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">ENTER</span>
+                                    </div>
+                                    <input name="UsernameFoget" asp-for="UsernameFoget" id="txtUserForget" type="text" placeholder="Username" class="form-control" />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">ENTER</span>
+                                    </div>
+                                    <input name="Email" asp-for="Email" id="txtEmail" type="email" placeholder="Email" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                @*<div class="col-12" style="background-color: #e6f0ff">*@
+                    <div class="col-6">
+                        <button id="btnSubmitForgot" type="submit" class="btn btn-primary btn-block" style="font-size: larger;" asp-action="Login">SEND</button>
+                    </div>
+                    <div class="col-6">
+                        <button data-dismiss="modal" type="button" class="btn btn-danger btn-block" style="font-size: larger;" asp-action="Login">CANCEL</button>
+                    </div>
+                @*</div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script language="javascript" type="text/javascript">
+    $("#partialModal").find(".modal-body").html();
+    $("#partialModal").modal('show');
+
+    setInterval(myTimer, 1000);
+
+    function myTimer() {
+        const d = new Date();
+        document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+    }
+
+    //const togglePassword = document.querySelector('#togglePassword');
+    //const Password = document.querySelector('#Password');
+
+    //togglePassword.addEventListener('click', function (e) {
+    //    const type = Password.getAttribute('type') === 'Password' ? 'text' : 'Password';
+    //    Password.setAttribute('type', type);
+    //    this.classList.toggle('fa-eye-slash');
+    //});
+
+    $(function () {
+        $("#btnSettings").click(function () {
+            $("#popModalSettings").find(".modal-body").html();
+            $("#popModalSettings").modal('show');
+        });
+    });
+
+    $(function () {
+        $("#btnSubmitForgot").click(function () {
+            var email = $("#txtEmail").val();
+            var uname = $("#txtUserForget").val();
+            try {
+                $.ajax({
+                    //cache: false,
+                    type: "POST",
+                    url: "/Home/ForgetPassword",
+                    data: { email: email, uname: uname },
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        $("#popModalSettings").modal('hide');
+                        $("#txtEmail").val('');
+                        $("#txtUserForget").val('');
+                        if (response == 'Check email') {
+                            if (confirm(response) == true) {
+                                return;
+                            }
+                            else {
+                                return;
+                            }
+                        }
+                        if (response == 'null') {
+                            if (confirm('Please Check Username and Email') == true) {
+                                return;
+                            }
+                            else {
+                                return;
+                            }
+                        }
+                        else {
+                            alert(reponse);
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+            catch (e) {
+                alert("err: " + e)
+            }
+        });
+    });
+</script>
